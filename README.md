@@ -4,15 +4,7 @@ A graph convolutional network for skeleton based action recognition.
 <div align="center">
     <img src="resource/info/pipeline.png">
 </div>
-<!--
-This repository holds the codebase, dataset and models for the paper:
-**Multimodal Fusion via Teacher-Student Network for Indoor Action Recognition**
 
-update github version with below commands:
-  git add .
-  git add commit
-  git push git@github.com:bruceyo/TSMF.git
--->
 This repository holds the codebase, dataset and models for the paper>
 
 **Spatial Temporal Graph Convolutional Networks for Skeleton-Based Action Recognition** Sijie Yan, Yuanjun Xiong and Dahua Lin, AAAI 2018.
