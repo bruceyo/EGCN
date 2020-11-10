@@ -1,0 +1,65 @@
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from torch.autograd import Variable
+
+from net.utils.tgcn import ConvTemporalGraphical
+from net.utils.graph import Graph
+
+from .st_gcn_ui_prmd import Model as ST_GCN
+
+class Model(nn.Module):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__()
+
+        self.gcn_pos = ST_GCN(*args, **kwargs)
+        self.gcn_ang = ST_GCN(*args, **kwargs)
+        #self.cos = nn.CosineSimilarity(dim=1, eps=1e-6)
+
+
+    def forward(self, x_pos, x_ang):
+
+        # data normalization
+        N, C, T, V, M = x_pos.size()
+        x_pos = x_pos.permute(0, 4, 3, 1, 2).contiguous()
+        x_pos = x_pos.view(N * M, V * C, T)
+        x_pos = self.gcn_pos.data_bn(x_pos)
+        x_pos = x_pos.view(N, M, V, C, T)
+        x_pos = x_pos.permute(0, 1, 3, 4, 2).contiguous()
+        x_pos = x_pos.view(N * M, C, T, V)
+
+        # forwad
+        for gcn, importance in zip(self.gcn_pos.st_gcn_networks, self.gcn_pos.edge_importance):
+            x_pos, _ = gcn(x_pos, self.gcn_pos.A * importance)
+
+        # global pooling
+        x_pos = F.avg_pool2d(x_pos, x_pos.size()[2:])
+        x_pos = x_pos.view(N, M, -1, 1, 1).mean(dim=1)
+        #print("x_pos.size(): ", x_pos.size())
+        # prediction
+        x_pos_pre = self.gcn_pos.fcn(x_pos)
+        x_pos_pre = x_pos_pre.view(x_pos_pre.size(0), -1)
+
+        # data normalization
+        N, C, T, V, M = x_ang.size()
+        x_ang = x_ang.permute(0, 4, 3, 1, 2).contiguous()
+        x_ang = x_ang.view(N * M, V * C, T)
+        x_ang = self.gcn_ang.data_bn(x_ang)
+        x_ang = x_ang.view(N, M, V, C, T)
+        x_ang = x_ang.permute(0, 1, 3, 4, 2).contiguous()
+        x_ang = x_ang.view(N * M, C, T, V)
+
+        # forwad
+        for gcn, importance in zip(self.gcn_ang.st_gcn_networks, self.gcn_ang.edge_importance):
+            x_ang, _ = gcn(x_ang, self.gcn_ang.A * importance)
+
+        # global pooling
+        x_ang = F.avg_pool2d(x_ang, x_ang.size()[2:])
+        x_ang = x_ang.view(N, M, -1, 1, 1).mean(dim=1)
+
+        # prediction
+        x_ang_pre = self.gcn_ang.fcn(x_ang)
+        x_ang_pre = x_ang_pre.view(x_ang_pre.size(0), -1)
+
+        return x_pos_pre+x_ang_pre
