@@ -4,7 +4,15 @@ A graph convolutional network for skeleton based action recognition.
 <div align="center">
     <img src="resource/info/pipeline.png">
 </div>
+<!--
+This repository holds the codebase, dataset and models for the paper:
+**Multimodal Fusion via Teacher-Student Network for Indoor Action Recognition**
 
+update github version with below commands:
+  git add .
+  git add commit
+  git push git@github.com:bruceyo/TSMF.git
+-->
 This repository holds the codebase, dataset and models for the paper>
 
 **Spatial Temporal Graph Convolutional Networks for Skeleton-Based Action Recognition** Sijie Yan, Yuanjun Xiong and Dahua Lin, AAAI 2018.
@@ -46,11 +54,9 @@ Below figures show the neural response magnitude of each node in the last layer 
     <td><img width="250px" src="resource/samples/ang_uiprmd_vicon.gif"></td>
   </tr>
   <tr>
-    <td><font size="1">Hammer throw<font></td>
-    <td><font size="1">Clean and jerk<font></td>
-    <td><font size="1">Pull ups<font></td>
-    <td><font size="1">Tai chi<font></td>
-    <td><font size="1">Juggling ball<font></td>
+    <td><font size="1">KIMORE (Kinect v2)<font></td>
+    <td><font size="1">UI-PRMD (Kinect v2)<font></td>
+    <td><font size="1">UI-PRMD (Vicon)<font></td>
   </tr>
 </table>
 
