@@ -34,11 +34,9 @@ Below figures show the neural response magnitude of each node in the last layer 
     <td><img width="250px" src="resource/samples/pos_uiprmd_vicon.gif"></td>
   </tr>
   <tr>
-    <td><font size="1">Touch head<font></td>
-    <td><font size="1">Sitting down<font></td>
-    <td><font size="1">Take off a shoe<font></td>
-    <td><font size="1">Eat meal/snack<font></td>
-    <td><font size="1">Kick other person<font></td>
+    <td><font size="1">Pos KIMORE (Kinect v2)<font></td>
+    <td><font size="1">Pos UI-PRMD (Kinect v2)<font></td>
+    <td><font size="1">Pos UI-PRMD (Vicon)<font></td>
   </tr>
   <tr>
     <td><img width="250px" src="resource/samples/ang_kimore.gif"></td>
@@ -46,9 +44,9 @@ Below figures show the neural response magnitude of each node in the last layer 
     <td><img width="250px" src="resource/samples/ang_uiprmd_vicon.gif"></td>
   </tr>
   <tr>
-    <td><font size="1">KIMORE (Kinect v2)<font></td>
-    <td><font size="1">UI-PRMD (Kinect v2)<font></td>
-    <td><font size="1">UI-PRMD (Vicon)<font></td>
+    <td><font size="1">Ang KIMORE (Kinect v2)<font></td>
+    <td><font size="1">Ang UI-PRMD (Kinect v2)<font></td>
+    <td><font size="1">Ang UI-PRMD (Vicon)<font></td>
   </tr>
 </table>
 
