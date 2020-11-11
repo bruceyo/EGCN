@@ -1,11 +1,11 @@
-# Spatial Temporal Graph Convolutional Networks (ST-GCN)
-A graph convolutional network for skeleton based action recognition.
+# Ensemble-based Graph Convolutional Networks (EGCN)
+Effective Skeleton-based Rehabilitation Exercise Assessment with Ensemble-based Graph Convolutional Networks.
 
 <div align="center">
-    <img src="resource/info/pipeline.png">
+    <img src="resource/info/ensemble_framework.png">
 </div>
 
-This repository holds the codebase, dataset and models for the paper>
+This repository holds the codebase, dataset and models for the review purpose of CVPR 2021 submission 2156.
 
 **Spatial Temporal Graph Convolutional Networks for Skeleton-Based Action Recognition** Sijie Yan, Yuanjun Xiong and Dahua Lin, AAAI 2018.
 
