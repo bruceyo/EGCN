@@ -9,18 +9,7 @@ Rehabilitation exercise aims to restore physical functions from injury. With the
     <img src="resource/info/ensemble_framework.png">
 </div>
 
-
-
-**Spatial Temporal Graph Convolutional Networks for Skeleton-Based Action Recognition** Sijie Yan, Yuanjun Xiong and Dahua Lin, AAAI 2018.
-
-[[Arxiv Preprint]](https://arxiv.org/abs/1801.07455)
-
-## News & Updates
-- June. 5, 2018 - A demo for feature visualization and skeleton based action recognition is released.
-- June. 1, 2018 - We update our code base and complete the PyTorch 0.4.0 migration. You can switch to the old version [v0.1.0](https://github.com/yysijie/st-gcn/tree/v0.1.0)
-to acquire the original setting in the paper.
-
-## Visulization of position (Pos) and angular (Ang) features of skeleton joints.
+## Visulization of Position (Pos) and Angular (Ang) Features of Skeleton Joints.
 EGCN is able to make use of the position and angular features of the skeleton data for exercise evaluation purpose.
 Below figures show the visulized views of the skeleton features from **KIMORE** and **UI-PRMD** datasets. The first row of below figures is 3d position features, and the second row is the angular features (a.k.a. orientation features).
 
@@ -47,6 +36,40 @@ Below figures show the visulized views of the skeleton features from **KIMORE** 
   </tr>
 </table>
 
+## Prerequisites
+Our codebase is based on **Python3** (>=3.5). There are a few dependencies to run the code. The major libraries we depend are
+- [PyTorch](http://pytorch.org/) (Release version 0.4.0)
+- [Openpose@92cdcad](https://github.com/yysijie/openpose) (Optional: for demo only)
+- FFmpeg (Optional: for demo only), which can be installed by `sudo apt-get install ffmpeg`
+- Other Python libraries can be installed by `pip install -r requirements.txt`
+
+### Installation
+```
+cd torchlight; python setup.py install; cd ..
+```
+
+### Get pretrained models
+We provided the pretrained model weithts of our **ST-GCN**. The model weights can be downloaded by running the script
+```
+bash tools/get_models.sh
+```
+The downloaded models will be stored under ```./models```.
+<!-- If you get an error message after running above command, you can also obtain models from [GoogleDrive](https://drive.google.com/open?id=1koTe3ces06NCntVdfLxF7O2Z4l_5csnX) or [BaiduYun](https://pan.baidu.com/s/1dwKG2TLvG-R1qeIiE4MjeA#list/path=%2FShare%2FAAAI18%2Fst-gcn&parentPath=%2FShare), and manually put them into ```./models```. -->
+
+
+## Data Preparation
+
+We experimented on two skeleton-based action evaluation datasts: **UI-PRMD** and **KIMORE**.
+
+### UI-PRMD
+[Kinetics](https://deepmind.com/research/open-source/open-source-datasets/kinetics/) is a video-based dataset for action recognition which only provide raw video clips without skeleton data. Kinetics dataset include To obatin the joint locations, we first resized all videos to the resolution of 340x256 and converted the frame rate to 30 fps.  Then, we extracted skeletons from each frame in Kinetics by [Openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose). The extracted skeleton data we called **Kinetics-skeleton**(7.5GB) can be directly downloaded from [GoogleDrive](https://drive.google.com/open?id=1SPQ6FmFsjGg3f59uCWfdUWI-5HJM_YhZ) or [BaiduYun](https://pan.baidu.com/s/1dwKG2TLvG-R1qeIiE4MjeA#list/path=%2FShare%2FAAAI18%2Fkinetics-skeleton&parentPath=%2FShare).
+
+After uncompressing, rebuild the database by this command:
+```
+python tools/kinetics_gendata.py --data_path <path to kinetics-skeleton>
+```
+
+### KIMORE
 For the **KIMORE** dataset, we perform manul segmentation on based on exercise specific features. Below are 8 samples of the exercises segmented from **KIMORE**. Es2-4 are segmented as the left and right directions.
 
 <table style="width:100%; table-layout:fixed;">
@@ -76,47 +99,11 @@ For the **KIMORE** dataset, we perform manul segmentation on based on exercise s
   </tr>
 </table>
 
-## Prerequisites
-Our codebase is based on **Python3** (>=3.5). There are a few dependencies to run the code. The major libraries we depend are
-- [PyTorch](http://pytorch.org/) (Release version 0.4.0)
-- [Openpose@92cdcad](https://github.com/yysijie/openpose) (Optional: for demo only)
-- FFmpeg (Optional: for demo only), which can be installed by `sudo apt-get install ffmpeg`
-- Other Python libraries can be installed by `pip install -r requirements.txt`
-
-### Installation
-```
-cd torchlight; python setup.py install; cd ..
-```
-
-### Get pretrained models
-We provided the pretrained model weithts of our **ST-GCN**. The model weights can be downloaded by running the script
-```
-bash tools/get_models.sh
-```
-The downloaded models will be stored under ```./models```.
-<!-- If you get an error message after running above command, you can also obtain models from [GoogleDrive](https://drive.google.com/open?id=1koTe3ces06NCntVdfLxF7O2Z4l_5csnX) or [BaiduYun](https://pan.baidu.com/s/1dwKG2TLvG-R1qeIiE4MjeA#list/path=%2FShare%2FAAAI18%2Fst-gcn&parentPath=%2FShare), and manually put them into ```./models```. -->
-
-
-## Data Preparation
-
-We experimented on two skeleton-based action recognition datasts: **Kinetics-skeleton** and **NTU RGB+D**. The experiments on NTU RGB+D
-is not currently supported in this new version. You can switch to the old version [v0.1.0](https://github.com/yysijie/st-gcn/tree/v0.1.0)
-to acquire the full experimental setting.
-
-### Kinetics-skeleton
-[Kinetics](https://deepmind.com/research/open-source/open-source-datasets/kinetics/) is a video-based dataset for action recognition which only provide raw video clips without skeleton data. Kinetics dataset include To obatin the joint locations, we first resized all videos to the resolution of 340x256 and converted the frame rate to 30 fps.  Then, we extracted skeletons from each frame in Kinetics by [Openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose). The extracted skeleton data we called **Kinetics-skeleton**(7.5GB) can be directly downloaded from [GoogleDrive](https://drive.google.com/open?id=1SPQ6FmFsjGg3f59uCWfdUWI-5HJM_YhZ) or [BaiduYun](https://pan.baidu.com/s/1dwKG2TLvG-R1qeIiE4MjeA#list/path=%2FShare%2FAAAI18%2Fkinetics-skeleton&parentPath=%2FShare).
-
-After uncompressing, rebuild the database by this command:
-```
-python tools/kinetics_gendata.py --data_path <path to kinetics-skeleton>
-```
-
-<!-- ### NTU RGB+D
-NTU RGB+D can be downloaded from [their website](http://rose1.ntu.edu.sg/datasets/actionrecognition.asp). Only the **3D skeletons**(5.8GB) modality is required in our experiments. After that, this command should be used to build the database for training or evaluation:
+KIMORE can be downloaded from [their website](https://vrai.dii.univpm.it/content/kimore-dataset). After that, this command should be used to build the database for training or evaluation:
 ```
 python tools/ntu_gendata.py --data_path <path to nturgbd+d_skeletons>
 ```
-where the ```<path to nturgbd+d_skeletons>``` points to the 3D skeletons modality of NTU RGB+D dataset you download. -->
+where the ```<path to nturgbd+d_skeletons>``` points to the 3D skeletons modality of NTU RGB+D dataset you download.
 
 ## Testing Pretrained Models
 
@@ -172,20 +159,10 @@ Finally, custom model evaluation can be achieved by this command as we mentioned
 python main.py -c config/st_gcn/<dataset>/test.yaml --weights <path to model weights>
 ```
 
-## Citation
-Please cite the following paper if you use this repository in your reseach.
-```
-@inproceedings{stgcn2018aaai,
-  title     = {Spatial Temporal Graph Convolutional Networks for Skeleton-Based Action Recognition},
-  author    = {Sijie Yan and Yuanjun Xiong and Dahua Lin},
-  booktitle = {AAAI},
-  year      = {2018},
-}
-```
 
 ## Contact
 For any question, feel free to contact
 ```
-Sijie Yan     : ys016@ie.cuhk.edu.hk
-Yuanjun Xiong : bitxiong@gmail.com
+xxx     : xxx@xxx
+xxx     : xxx@xxx
 ```
