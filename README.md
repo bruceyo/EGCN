@@ -1,11 +1,15 @@
 # Ensemble-based Graph Convolutional Networks (EGCN)
 Effective Skeleton-based Rehabilitation Exercise Assessment with Ensemble-based Graph Convolutional Networks.
+This repository holds the codebase, dataset and models for the review purpose of CVPR 2021 submission 2156.
+
+## Introduction
+Rehabilitation exercise aims to restore physical functions from injury. With the release of motion sensors like Kinect, skeleton-based rehabilitation assessment attracts increasing research interest in computer vision. Existing attempts on skeleton-based rehabilitation exercise assessment usually rely on geometric features or statistical methods, which is a lack of effective skeleton data representation methods. Usually, skeleton data could be collected with sensors like Kinect or motion captures that provide two groups of features (i.e., position and orientation features). Graph Convolutional Network (GCN) has achieved encouraging performance for skeleton-based action recognition. However, it might not be able to fully make use of different features of the skeleton data. To advance the prior work, we propose an Ensemble-based GCN (EGCN) learning framework for rehabilitation exercise assessment.
 
 <div align="center">
     <img src="resource/info/ensemble_framework.png">
 </div>
 
-This repository holds the codebase, dataset and models for the review purpose of CVPR 2021 submission 2156.
+
 
 **Spatial Temporal Graph Convolutional Networks for Skeleton-Based Action Recognition** Sijie Yan, Yuanjun Xiong and Dahua Lin, AAAI 2018.
 
@@ -16,16 +20,9 @@ This repository holds the codebase, dataset and models for the review purpose of
 - June. 1, 2018 - We update our code base and complete the PyTorch 0.4.0 migration. You can switch to the old version [v0.1.0](https://github.com/yysijie/st-gcn/tree/v0.1.0)
 to acquire the original setting in the paper.
 
-## Visulization of ST-GCN in Action
-Our demo for skeleton based action recognition:
-<p align="center">
-    <img src="resource/info/demo_video.gif", width="1200">
-</p>
-
-
-ST-GCN is able to exploit local pattern and correlation from human skeletons.
-Below figures show the neural response magnitude of each node in the last layer of our ST-GCN.
-
+## Visulization of position (Pos) and angular (Ang) features of skeleton joints.
+EGCN is able to make use of the position and angular features of the skeleton data for exercise evaluation purpose.
+Below figures show the visulized views of the skeleton features from **KIMORE** and **UI-PRMD** datasets. The first row of below figures is 3d position features, and the second row is the angular features (a.k.a. orientation features).
 
 <table style="width:100%; table-layout:fixed;">
   <tr>
@@ -50,7 +47,7 @@ Below figures show the neural response magnitude of each node in the last layer 
   </tr>
 </table>
 
-The first row of above results is from **NTU-RGB+D** dataset, and the second row is from **Kinetics-skeleton**.
+For the **KIMORE** dataset, we perform manul segmentation on based on exercise specific features. Below are 8 samples of the exercises segmented from **KIMORE**. Es2-4 are segmented as the left and right directions.
 
 <table style="width:100%; table-layout:fixed;">
   <tr>
@@ -99,14 +96,6 @@ bash tools/get_models.sh
 The downloaded models will be stored under ```./models```.
 <!-- If you get an error message after running above command, you can also obtain models from [GoogleDrive](https://drive.google.com/open?id=1koTe3ces06NCntVdfLxF7O2Z4l_5csnX) or [BaiduYun](https://pan.baidu.com/s/1dwKG2TLvG-R1qeIiE4MjeA#list/path=%2FShare%2FAAAI18%2Fst-gcn&parentPath=%2FShare), and manually put them into ```./models```. -->
 
-## Demo
-To visualize how ST-GCN exploit local correlation and local pattern, we compute the feature vector magnitude of each node in the final spatial temporal graph, and overlay them on the original video. **Openpose** should be ready for extracting human skeletons from videos. The skeleton based action recognition results is also shwon thereon.
-
-Run the demo by this command:
-```
-python main.py demo --openpose <path to openpose build directory> [--video <path to your video> --device <gpu0> <gpu1>]
-```
-A video as above will be generated and saved under ```data/demo_result/```.
 
 ## Data Preparation
 
