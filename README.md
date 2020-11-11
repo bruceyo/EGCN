@@ -52,6 +52,32 @@ Below figures show the neural response magnitude of each node in the last layer 
 
 The first row of above results is from **NTU-RGB+D** dataset, and the second row is from **Kinetics-skeleton**.
 
+<table style="width:100%; table-layout:fixed;">
+  <tr>
+    <td><img width="250px" src="resource/samples/Es1.gif"></td>
+    <td><img width="250px" src="resource/samples/Es2_L.gif"></td>
+    <td><img width="250px" src="resource/samples/Es3_L.gif"></td>
+    <td><img width="250px" src="resource/samples/Es4_L.gif"></td>
+  </tr>
+  <tr>
+    <td><font size="1">KIMORE Es1<font></td>
+    <td><font size="1">KIMORE Es2(L)<font></td>
+    <td><font size="1">KIMORE Es3(L)<font></td>
+    <td><font size="1">KIMORE Es4(L)<font></td>
+  </tr>
+  <tr>
+    <td><img width="250px" src="resource/samples/Es2_R.gif"></td>
+    <td><img width="250px" src="resource/samples/Es3_R.gif"></td>
+    <td><img width="250px" src="resource/samples/Es4_R.gif"></td>
+    <td><img width="250px" src="resource/samples/Es5.gif"></td>
+  </tr>
+  <tr>
+    <td><font size="1">KIMORE Es2(R)<font></td>
+    <td><font size="1">KIMORE Es3(R)<font></td>
+    <td><font size="1">KIMORE Es4(R)<font></td>
+    <td><font size="1">KIMORE Es5<font></td>
+  </tr>
+</table>
 
 ## Prerequisites
 Our codebase is based on **Python3** (>=3.5). There are a few dependencies to run the code. The major libraries we depend are
