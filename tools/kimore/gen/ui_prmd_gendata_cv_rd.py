@@ -19,7 +19,7 @@ num_joint = 22
 max_frame = 150
 toolbar_width = 30
 
-files_ = os.listdir('/mnt/nas/ntu-rgbd/other_Datasets/UI_PRMD/skl_whole')
+files_ = os.listdir('./data/UI_PRMD/skl_whole')
 
 number_of_folds = 5
 

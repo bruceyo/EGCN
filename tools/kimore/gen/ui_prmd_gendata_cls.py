@@ -98,9 +98,9 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='NTU-RGB-D Data Converter.')
     parser.add_argument(
-        '--data_path', default='/mnt/nas/ntu-rgbd/other_Datasets/UI_PRMD/skl_whole')
+        '--data_path', default='./data/UI_PRMD/skl_whole')
     #parser.add_argument('--out_folder', default='/media/bruce/2T/data/UI_PRMD/st-gcn/kinect/sd_1_1/pos')
-    parser.add_argument('--out_folder', default='/media/bruce/2T/data/UI_PRMD/st-gcn/kinect/cls/pos_all_4_cv')
+    parser.add_argument('--out_folder', default='./data/UI_PRMD/st-gcn/kinect/cls/pos_all_4_cv')
     #parser.add_argument('--out_folder', default='/media/bruce/2T/data/UI_PRMD/st-gcn/vicon/sd_1_1/ang')
 
     #benchmark = ['xsub', 'xview']

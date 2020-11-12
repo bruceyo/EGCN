@@ -20,7 +20,7 @@ max_frame = 150
 toolbar_width = 30
 
 
-files_ = os.listdir('/media/bruce/2T/data/KiMoRe/skeleton')
+files_ = os.listdir('./data/KiMoRe/skeleton')
 
 def print_toolbar(rate, annotation=''):
     # setup toolbar

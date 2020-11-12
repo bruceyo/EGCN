@@ -9,7 +9,7 @@ Rehabilitation exercise aims to restore physical functions from injury. With the
     <img src="resource/info/ensemble_framework.png">
 </div>
 
-## Visulization of Position (Pos) and Angular (Ang) Features of Skeleton Joints.
+## Visulization of Position and Angular Features of Skeleton Joints.
 EGCN is able to make use of the position and angular features of the skeleton data for exercise evaluation purpose.
 Below figures show the visulized views of the skeleton features from **KIMORE** and **UI-PRMD** datasets. The first row of below figures is 3d position features, and the second row is the angular features (a.k.a. orientation features).
 
@@ -19,28 +19,20 @@ Below figures show the visulized views of the skeleton features from **KIMORE** 
     <td><img width="250px" src="resource/samples/pos_uiprmd_kinect.gif"></td>
     <td><img width="250px" src="resource/samples/pos_uiprmd_vicon.gif"></td>
   </tr>
-  <tr>
-    <td><font size="1">Pos KIMORE (Kinect v2)<font></td>
-    <td><font size="1">Pos UI-PRMD (Kinect v2)<font></td>
-    <td><font size="1">Pos UI-PRMD (Vicon)<font></td>
-  </tr>
-  <tr>
     <td><img width="250px" src="resource/samples/ang_kimore.gif"></td>
     <td><img width="250px" src="resource/samples/ang_uiprmd_kinect.gif"></td>
     <td><img width="250px" src="resource/samples/ang_uiprmd_vicon.gif"></td>
   </tr>
   <tr>
-    <td><font size="1">Ang KIMORE (Kinect v2)<font></td>
-    <td><font size="1">Ang UI-PRMD (Kinect v2)<font></td>
-    <td><font size="1">Ang UI-PRMD (Vicon)<font></td>
+    <td style="text-align:center"><font size="1">Es5 in KIMORE (Kinect v2)<font></td>
+    <td style="text-align:center"><font size="1">E1 in UI-PRMD (Kinect v2)<font></td>
+    <td style="text-align:center"><font size="1">E1 in UI-PRMD (Vicon)<font></td>
   </tr>
 </table>
 
 ## Prerequisites
 Our codebase is based on **Python3** (>=3.5). There are a few dependencies to run the code. The major libraries we depend are
 - [PyTorch](http://pytorch.org/) (Release version 0.4.0)
-- [Openpose@92cdcad](https://github.com/yysijie/openpose) (Optional: for demo only)
-- FFmpeg (Optional: for demo only), which can be installed by `sudo apt-get install ffmpeg`
 - Other Python libraries can be installed by `pip install -r requirements.txt`
 
 ### Installation
@@ -49,7 +41,7 @@ cd torchlight; python setup.py install; cd ..
 ```
 
 ### Get pretrained models
-We provided the pretrained model weithts of our **ST-GCN**. The model weights can be downloaded by running the script
+We provided the pretrained model weithts of our **EGCN**. The model weights can be downloaded by running the script
 ```
 bash tools/get_models.sh
 ```
@@ -62,7 +54,7 @@ The downloaded models will be stored under ```./models```.
 We experimented on two skeleton-based action evaluation datasts: **UI-PRMD** and **KIMORE**.
 
 ### UI-PRMD
-[Kinetics](https://deepmind.com/research/open-source/open-source-datasets/kinetics/) is a video-based dataset for action recognition which only provide raw video clips without skeleton data. Kinetics dataset include To obatin the joint locations, we first resized all videos to the resolution of 340x256 and converted the frame rate to 30 fps.  Then, we extracted skeletons from each frame in Kinetics by [Openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose). The extracted skeleton data we called **Kinetics-skeleton**(7.5GB) can be directly downloaded from [GoogleDrive](https://drive.google.com/open?id=1SPQ6FmFsjGg3f59uCWfdUWI-5HJM_YhZ) or [BaiduYun](https://pan.baidu.com/s/1dwKG2TLvG-R1qeIiE4MjeA#list/path=%2FShare%2FAAAI18%2Fkinetics-skeleton&parentPath=%2FShare).
+[UI-PRMD](https://webpages.uidaho.edu/ui-prmd/) is a data set of movements related to common exercises performed by patients in physical therapy and rehabilitation programs. The data set consists of 10 rehabilitation movements. A sample of 10 healthy individuals repeated each movement 10 times in front of two sensory systems for motion capturing: a Vicon optical tracker, and a Kinect camera. The data is presented as positions and angles of the body joints in the skeletal models provided by the Vicon and Kinect mocap systems. We use the consistent exercise repetitions in the [Reduced Dataset](https://webpages.uidaho.edu/ui-prmd/Reduced%20Data.zip)(174M), which is the same as the prior work. The dataset for our experimental setting could be downloaded from [Google Drive](https://drive.google.com/file/d/1bGVFdyi-ZaTX9UGBV9EnuuBSS8i1iSqq/view?usp=sharing) and [Baidu Wangpan](https://pan.baidu.com/s/1E6ETUCxDUw1WQiQORNqtYg)(code:1234).
 
 After uncompressing, rebuild the database by this command:
 ```
@@ -70,7 +62,7 @@ python tools/kinetics_gendata.py --data_path <path to kinetics-skeleton>
 ```
 
 ### KIMORE
-For the **KIMORE** dataset, we perform manul segmentation on based on exercise specific features. Below are 8 samples of the exercises segmented from **KIMORE**. Es2-4 are segmented as the left and right directions.
+For the **KIMORE** dataset, we perform manul segmentation on based on exercise specific features. Below are depth views of the exercises in **KIMORE**. Es2-4 are segmented as the left and right directions.
 
 <table style="width:100%; table-layout:fixed;">
   <tr>
@@ -99,7 +91,7 @@ For the **KIMORE** dataset, we perform manul segmentation on based on exercise s
   </tr>
 </table>
 
-KIMORE can be downloaded from [their website](https://vrai.dii.univpm.it/content/kimore-dataset). After that, this command should be used to build the database for training or evaluation:
+KIMORE can be downloaded from [their website](https://vrai.dii.univpm.it/content/kimore-dataset). The segmented skeleton data could be downloaded from [Google Drive](https://drive.google.com/file/d/15GOEOJFcZDLqC8iEw9t3bi6LGJksc9w8/view?usp=sharing) and [Baidu Wangpan](https://pan.baidu.com/s/1VKRJTvhCxQwIYDdvBT2mYg)(code:1234). After that, this command should be used to build the database for training or evaluation:
 ```
 python tools/ntu_gendata.py --data_path <path to nturgbd+d_skeletons>
 ```

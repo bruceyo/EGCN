@@ -25,7 +25,7 @@ cs = {'_1':[2,3,1,4,7],
       '_4':[12,13,20,21,24],
       '_5':[14,15,19,22,25]}
 
-files_ = os.listdir('/media/bruce/2T/data/KiMoRe/skeleton')
+files_ = os.listdir('./data/KiMoRe/skeleton')
 
 number_of_folds = 5
 
