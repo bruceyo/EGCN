@@ -54,7 +54,7 @@ The downloaded models will be stored under ```./models```.
 We experimented on two skeleton-based action evaluation datasts: **UI-PRMD** and **KIMORE**.
 
 ### UI-PRMD
-[UI-PRMD](https://webpages.uidaho.edu/ui-prmd/) is a data set of movements related to common exercises performed by patients in physical therapy and rehabilitation programs. The data set consists of 10 rehabilitation movements. A sample of 10 healthy individuals repeated each movement 10 times in front of two sensory systems for motion capturing: a Vicon optical tracker, and a Kinect camera. The data is presented as positions and angles of the body joints in the skeletal models provided by the Vicon and Kinect mocap systems. We use the consistent exercise repetitions in the [Reduced Dataset](https://webpages.uidaho.edu/ui-prmd/Reduced%20Data.zip)(174M), which is the same as the prior work. The dataset for our experimental setting could be downloaded from [Google Drive](https://drive.google.com/file/d/1bGVFdyi-ZaTX9UGBV9EnuuBSS8i1iSqq/view?usp=sharing) and [Baidu Wangpan](https://pan.baidu.com/s/1E6ETUCxDUw1WQiQORNqtYg)(code:1234).
+[UI-PRMD](https://webpages.uidaho.edu/ui-prmd/) is a data set of movements related to common exercises performed by patients in physical therapy and rehabilitation programs. The data set consists of 10 rehabilitation movements. A sample of 10 healthy individuals repeated each movement 10 times in front of two sensory systems for motion capturing: a Vicon optical tracker, and a Kinect camera. The data is presented as positions and angles of the body joints in the skeletal models provided by the Vicon and Kinect mocap systems. We use the consistent exercise repetitions in the [Reduced Dataset](https://webpages.uidaho.edu/ui-prmd/Reduced%20Data.zip)(174M), which is the same as the prior work. The dataset for our experimental setting could be downloaded from [Google Drive](https://drive.google.com/file/d/1bGVFdyi-ZaTX9UGBV9EnuuBSS8i1iSqq/view?usp=sharing) and [Baidu Wangpan](https://pan.baidu.com/s/1E6ETUCxDUw1WQiQORNqtYg) (code:1234).
 
 After uncompressing, rebuild the database by this command:
 ```
@@ -91,11 +91,11 @@ For the **KIMORE** dataset, we perform manul segmentation on based on exercise s
   </tr>
 </table>
 
-KIMORE can be downloaded from [their website](https://vrai.dii.univpm.it/content/kimore-dataset). The segmented skeleton data could be downloaded from [Google Drive](https://drive.google.com/file/d/15GOEOJFcZDLqC8iEw9t3bi6LGJksc9w8/view?usp=sharing) and [Baidu Wangpan](https://pan.baidu.com/s/1VKRJTvhCxQwIYDdvBT2mYg)(code:1234). After that, this command should be used to build the database for training or evaluation:
+**KIMORE** can be downloaded from [their website](https://vrai.dii.univpm.it/content/kimore-dataset). The segmented skeleton data could be downloaded from [Google Drive](https://drive.google.com/file/d/15GOEOJFcZDLqC8iEw9t3bi6LGJksc9w8/view?usp=sharing) and [Baidu Wangpan](https://pan.baidu.com/s/1VKRJTvhCxQwIYDdvBT2mYg) (code:1234). After that, this command should be used to build the database for training or evaluation:
 ```
-python tools/ntu_gendata.py --data_path <path to nturgbd+d_skeletons>
+python tools/ntu_gendata.py --data_path <path to KIMORE_skeletons>
 ```
-where the ```<path to nturgbd+d_skeletons>``` points to the 3D skeletons modality of NTU RGB+D dataset you download.
+where the ```<path to KIMORE_skeletons>``` points to the 3D skeletons modality of KIMORE dataset you download.
 
 ## Testing Pretrained Models
 
