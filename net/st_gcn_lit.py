@@ -17,15 +17,7 @@ class Model(nn.Module):
         self.gcn_pos = ST_GCN(*args, **kwargs)
         self.gcn_ang = ST_GCN(*args, **kwargs)
         self.cos = nn.CosineSimilarity(dim=1, eps=1e-6)
-        '''
-        self.fcn_1 = nn.Sequential(
-                    nn.Linear(256, 256),
-                    nn.ReLU(True),
-                    nn.Dropout(p=0.5),
-                    nn.Linear(256, 128),
-                    )
-        self.fcn_2 = nn.Linear(128, 2)
-        '''
+
     def forward(self, x_pos, x_ang):
 
         # data normalization

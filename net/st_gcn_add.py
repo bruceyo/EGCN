@@ -15,7 +15,6 @@ class Model(nn.Module):
 
         self.gcn_pos = ST_GCN(*args, **kwargs)
         self.gcn_ang = ST_GCN(*args, **kwargs)
-        #self.cos = nn.CosineSimilarity(dim=1, eps=1e-6)
 
 
     def forward(self, x_pos, x_ang):

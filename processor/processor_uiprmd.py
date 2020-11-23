@@ -44,31 +44,7 @@ class Processor(IO):
         self.meta_info = dict(epoch=0, iter=0, is_best=False, best_t1=0.499)
         # colum 1-4: training meanloss, testing meanloss, testing top 1, testing top 5
         self.progress_info = np.zeros([int(self.arg.num_epoch/self.arg.eval_interval),4])
-        #self.meta_info['best_t1'] = self.trained_best_t1()
-        print('trained_best_t1: ',self.meta_info['best_t1'])
 
-    def trained_best_t1(self):
-        result_path = os.path.join(self.arg.work_dir, 'best_result.pkl')
-        print(self.arg.test_feeder_args)
-        label_path = self.arg.test_feeder_args.get('label_path')
-        label = open(label_path, 'rb')
-        label = np.array(pickle.load(label))
-        label = label.T.tolist()
-        if not os.path.exists(result_path):
-            return 0.499
-
-        r1 = open(result_path, 'rb')
-        r1 = list(pickle.load(r1).items())
-        right_num_11 = 0
-        for i in range(len(label)):
-            l = label[i][1]
-            _, r11 = r1[i]
-
-            r11 = np.argmax(r11)
-            right_num_11 += int(r11 == int(l))
-
-        acc = right_num_11/len(label)
-        return acc
 
     def load_optimizer(self):
         pass

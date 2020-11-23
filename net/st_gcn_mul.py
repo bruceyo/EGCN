@@ -15,7 +15,6 @@ class Model(nn.Module):
 
         self.gcn_pos = ST_GCN(*args, **kwargs)
         self.gcn_ang = ST_GCN(*args, **kwargs)
-        #self.cos = nn.CosineSimilarity(dim=1, eps=1e-6)
 
     def forward(self, x_pos, x_ang):
 
@@ -27,7 +26,7 @@ class Model(nn.Module):
         x_ang = x_ang.view(N * M, V * C, T)
         x_ang = self.gcn_ang.data_bn(x_ang)
         x_ang = x_ang.view(N, M, V, C, T)
-        x_ang = x_ang.permute(0, 1, 3, 4, 2).contiguous()
+        x_ang = x_ang.permute(0, 1, 3, 4, 2bruce).contiguous()
         x_ang = x_ang.view(N * M, C, T, V)
 
         # forwad

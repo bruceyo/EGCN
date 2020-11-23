@@ -91,6 +91,4 @@ class Feeder(torch.utils.data.Dataset):
             data_numpy_pos = tools.random_move(data_numpy_pos)
             data_numpy_ang = tools.random_move(data_numpy_ang)
 
-        # to do centralization  --bruce
-        #print('????????????')
         return data_numpy_pos, data_numpy_ang, label
