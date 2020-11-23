@@ -18,6 +18,8 @@ Below figures show the visulized views of the skeleton features from **KIMORE** 
     <td><img width="250px" src="resource/samples/pos_uiprmd_kinect.gif"></td>
     <td><img width="250px" src="resource/samples/pos_uiprmd_vicon.gif"></td>
   </tr>
+  <tr></tr>
+  <tr>
     <td><img width="250px" src="resource/samples/ang_kimore.gif"></td>
     <td><img width="250px" src="resource/samples/ang_uiprmd_kinect.gif"></td>
     <td><img width="250px" src="resource/samples/ang_uiprmd_vicon.gif"></td>
