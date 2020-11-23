@@ -1,0 +1,36 @@
+#python main_ui_prmd_lit.py recognition -c config/st_gcn/kimore/xyzang/cv_rd/kimore_pre_2_1.yaml
+work_dir: ../../data/UI_PRMD/work_st_gcn/kinect/cv_rd/xyzang/9/2
+#weights: ../../data/UI_PRMD/work_st_gcn/8_2/epoch290_model.pt
+# feeder
+feeder: feeder.feeder.Feeder
+train_feeder_args:
+  data_path: ./data/UI_PRMD/cv_rd/xyzang/9/2/train_data.npy
+  label_path: ./data/UI_PRMD/cv_rd/xyzang/9/2/train_label.pkl
+test_feeder_args:
+  data_path: ./data/UI_PRMD/cv_rd/xyzang/9/2/eval_data.npy
+  label_path: ./data/UI_PRMD/cv_rd/xyzang/9/2/eval_label.pkl
+
+# model
+model: net.st_gcn_ui_prmd.Model
+model_args:
+  in_channels: 6
+  num_class: 2
+  dropout: 0.5
+  #dims: [45000,60,64,[256,128]]
+  edge_importance_weighting: True
+  graph_args:
+    layout: 'ui_prmd'
+    strategy: 'spatial'
+
+#opti
+weight_decay: 0.0001
+base_lr: 0.01
+#step: [10, 50]
+step: [10, 30]
+num_epoch: 50
+
+# training
+#device: [0,1,2,3]
+device: [0,1]
+batch_size: 8
+test_batch_size: 8

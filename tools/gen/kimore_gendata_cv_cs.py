@@ -10,22 +10,12 @@ import re
 
 from kimore_read import read_ang, read_xyzang, read_xyz
 
-training_subjects = [
-    1, 2, 4, 5, 8, 9, 13, 14, 15, 16, 17, 18, 19, 25, 27, 28, 31, 34, 35, 38
-]
-training_cameras = [2, 3]
 max_body = 1
 num_joint = 25
 max_frame = 150
 toolbar_width = 30
 
-cs = {'_1':[2,3,1,4,7],
-      '_2':[5,6,8,9,16],
-      '_3':[10,11,17,18,23],
-      '_4':[12,13,20,21,24],
-      '_5':[14,15,19,22,25]}
-
-files_ = os.listdir('/media/bruce/2T/data/KiMoRe/skeleton')
+files_ = os.listdir('./data/KiMoRe/skeleton')
 
 number_of_folds = 5
 
@@ -48,6 +38,7 @@ def gendata(data_path,
             out_path,
             action,
             fold,
+            feature='both',
             benchmark='xview'):
 
     sample_name = []
@@ -55,15 +46,12 @@ def gendata(data_path,
 
     r = re.compile(".*"+"E00"+str(action)+".*.skeleton")
     files = list(filter(r.match, files_))
-    #print('len(files):', len(files))
-    #samples_count = 0
+
     training_list = []
     testing_list = []
     training_list_label = []
     testing_list_label = []
     for group in ['G001', 'G003', 'G004', 'G005']:
-        #r = re.compile(group + ".*.skeleton")
-        #files_g = list(filter(r.match, files))
         if group == 'G001':
             label = 1
         else:
@@ -101,21 +89,30 @@ def gendata(data_path,
 
         with open('{}/{}_label.pkl'.format(out_path, part), 'wb') as f:
             pickle.dump((sample_name, list(sample_label)), f, protocol=2)
-        # np.save('{}/{}_label.npy'.format(out_path, part), sample_label)
+
+        num_channel = 3
+        if feature=='both':
+            num_channel = 6
 
         fp = open_memmap(
             '{}/{}_data.npy'.format(out_path, part),
             dtype='float32',
             mode='w+',
-            #shape=(len(sample_label), 3, max_frame, num_joint, max_body))
-            shape=(len(sample_label), 3, max_frame, num_joint, max_body))
+            shape=(len(sample_label), num_channel, max_frame, num_joint, max_body))
 
         for i, s in enumerate(sample_name):
             print_toolbar(i * 1.0 / len(sample_label),
                           '({:>5}/{:<5}) Processing {:>5}-{:<5} data: '.format(
                               i + 1, len(sample_name), benchmark, part))
-            data = read_ang(
-                os.path.join(data_path, s), max_body=max_body, num_joint=num_joint)
+            if feature=='position':
+                data = read_xyz(
+                    os.path.join(data_path, s), max_body=max_body, num_joint=num_joint)
+            elif feature=='angle':
+                data = read_ang(
+                    os.path.join(data_path, s), max_body=max_body, num_joint=num_joint)
+            else:
+                data = read_xyzang(
+                    os.path.join(data_path, s), max_body=max_body, num_joint=num_joint)
 
             fp[i, :, 0:data.shape[1], :, :] = data
         end_toolbar()
@@ -123,16 +120,14 @@ def gendata(data_path,
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='NTU-RGB-D Data Converter.')
-    parser.add_argument(
-        '--data_path', default='/media/bruce/2T/data/KiMoRe/skeleton')
-    #parser.add_argument('--out_folder', default='/media/bruce/2T/data/UI_PRMD/st-gcn/kinect/sd_1_1/pos')
-    parser.add_argument('--out_folder', default='/media/bruce/2T/data/KiMoRe/cross_validation/ang')
-    #parser.add_argument('--out_folder', default='/media/bruce/2T/data/UI_PRMD/st-gcn/vicon/sd_1_1/ang')
+    parser.add_argument('--data_path', default='./data/KiMoRe/skeleton', help='the path of the skeleton data')
+    parser.add_argument('--joint_feature', default='angle', choices=['angle','position','both'], help='the feature of the skeleton data')
+    parser.add_argument('--out_folder', default='./data/KiMoRe/cv_cs/ang')
+
     folds = ['1', '2', '3', '4', '5']
     arg = parser.parse_args()
     for act in [2,3,4,5,6,7,8,9]:
         for fold in folds:
-            #for b in benchmark:
             out_path = os.path.join(arg.out_folder, str(act),fold)
             if not os.path.exists(out_path):
                 os.makedirs(out_path)
@@ -142,9 +137,6 @@ if __name__ == '__main__':
                 out_path,
                 act,
                 fold,
-                benchmark='c_inc'
+                arg.joint_feature,
+                benchmark='cv_cs'
                 )
-
-    # 1. line 118
-    # 2. line 104
-    # 3. line 114
