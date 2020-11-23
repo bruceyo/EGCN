@@ -48,12 +48,7 @@ We experimented on two skeleton-based action evaluation datasts: **UI-PRMD** and
 
 After uncompressing, put the data into folder ```./data/UI_PRMD```, rebuild the database by this command:
 ```
-python ./tools/gen/ui_prmd_gendata_cv_cs.py --joint_feature position --out_folder ./data/UI_PRMD/cv_cs/ang
-python ./tools/gen/ui_prmd_gendata_cv_cs.py --joint_feature angle --out_folder ./data/UI_PRMD/cv_cs/xyz
-python ./tools/gen/ui_prmd_gendata_cv_cs.py --joint_feature both --out_folder ./data/UI_PRMD/cv_cs/xyzang
-python ./tools/gen/ui_prmd_gendata_cv_rd.py --joint_feature position --out_folder ./data/UI_PRMD/cv_rd/ang
-python ./tools/gen/ui_prmd_gendata_cv_rd.py --joint_feature angle --out_folder ./data/UI_PRMD/cv_rd/xyz
-python ./tools/gen/ui_prmd_gendata_cv_rd.py --joint_feature both --out_folder ./data/UI_PRMD/cv_rd/xyzang
+sh ./tools/gen/ui_prmd_gendata_all.sh
 ```
 
 ### KIMORE
@@ -89,12 +84,7 @@ For the KIMORE dataset, we perform manul segmentation on based on exercise speci
 KIMORE can be downloaded from [their website](https://vrai.dii.univpm.it/content/kimore-dataset). The segmented skeleton data could be downloaded from [Google Drive](https://drive.google.com/file/d/15GOEOJFcZDLqC8iEw9t3bi6LGJksc9w8/view?usp=sharing) and [Baidu Wangpan](https://pan.baidu.com/s/1VKRJTvhCxQwIYDdvBT2mYg) (code:1234). After that, this command should be used to build the database for training or evaluation:
 After uncompressing, put the data into folder ```./data/KiMoRe```, then rebuild the database by this command:
 ```
-python ./tools/gen/kimore_gendata_cv_cs.py --joint_feature position --out_folder ./data/KiMoRe/cv_cs/ang
-python ./tools/gen/kimore_gendata_cv_cs.py --joint_feature angle --out_folder ./data/KiMoRe/cv_cs/xyz
-python ./tools/gen/kimore_gendata_cv_cs.py --joint_feature both --out_folder ./data/KiMoRe/cv_cs/xyzang
-python ./tools/gen/kimore_gendata_cv_rd.py --joint_feature position --out_folder ./data/KiMoRe/cv_rd/ang
-python ./tools/gen/kimore_gendata_cv_rd.py --joint_feature angle --out_folder ./data/KiMoRe/cv_rd/xyz
-python ./tools/gen/kimore_gendata_cv_rd.py --joint_feature both --out_folder ./data/KiMoRe/cv_rd/xyzang
+sh ./tools/gen/kimore_gendata_all.sh
 ```
 
 ### Test the Trained Results
