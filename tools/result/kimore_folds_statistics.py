@@ -3,7 +3,7 @@
 """
 Created on Thu Oct  8 12:55:31 2020
 
-@author: bruce
+@author: xxx
 """
 
 import pickle

@@ -13,9 +13,6 @@ if __name__ == '__main__':
     # region register processor yapf: disable
     processors = dict()
     processors['recognition'] = import_class('processor.recognition_uiprmd_nem.REC_Processor')
-    processors['demo'] = import_class('processor.demo.Demo')
-    processors['vae_testing'] = import_class('processor.demo.Demo')
-    #endregion yapf: enable
 
     # add sub-parser
     subparsers = parser.add_subparsers(dest='processor')

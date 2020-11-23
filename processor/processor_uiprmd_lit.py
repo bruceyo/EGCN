@@ -131,14 +131,7 @@ class Processor(IO):
 
     def start(self):
         self.io.print_log('Parameters:\n{}\n'.format(str(vars(self.arg))))
-        #print(self.model)
-        # change fn layer
-        #self.model.module.fcn = nn.Conv2d(256, 12, kernel_size=1).to(self.dev) # yaml set original class_num to 60 to load weights
 
-
-        #self.gpu()
-        #print('start model: \n',self.model)
-        #print(model)
         # training phase
         if self.arg.phase == 'train':
             for epoch in range(self.arg.start_epoch, self.arg.num_epoch):
@@ -148,25 +141,21 @@ class Processor(IO):
                 self.io.print_log('Training epoch: {}'.format(epoch + 1))
                 self.train()
                 self.io.print_log('Done.')
-                #self.progress_info[epoch,0]  =  self.epoch_info['ls_cls']
+
 
                 # evaluation
                 if ((epoch + 1) % self.arg.eval_interval == 0) or (
                         epoch + 1 == self.arg.num_epoch):
-                    # Bruce 20190918
+
                     self.progress_info[int(epoch/self.arg.eval_interval),0]  =  self.epoch_info['ls_cls']
                     self.io.print_log('Eval epoch: {}'.format(epoch + 1))
                     self.test()
                     self.io.print_log('Eval Done.')
-                    # Bruce 20190918
+
                     self.progress_info[int(epoch/self.arg.eval_interval),1]  =  self.epoch_info['cos']
-                # save model
-                #if ((epoch + 1) % self.arg.save_interval == 0) or (
-                #        epoch + 1 == self.arg.num_epoch):
-                    if self.meta_info['is_best']:                     # recognition.py def show_topk(self, k):
+
+                    if self.meta_info['is_best']:
                         self.io.print_log('Save best Top1 at epoch:{}'.format(epoch + 1))
-                        #filename = 'epoch{}_model.pt'.format(epoch + 1)
-                        #self.io.save_model(self.model, filename)
                         self.io.save_model(self.model, 'best_model.pt')
                         self.meta_info['is_best'] = False
                         self.io.print_log('Save Done.')

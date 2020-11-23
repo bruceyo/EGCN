@@ -8,7 +8,7 @@ Rehabilitation exercise aims to restore physical functions from injury. With the
     <img src="resource/info/ensemble_framework.png">
 </div>
 
-## Visulization of Position and Angle Features of Skeleton Joints.
+## Visulization of Position and Orientation Features of Skeleton Joints
 EGCN is able to make use of the position and angle features of the skeleton data for exercise evaluation purpose.
 Below figures show the visulized views of the skeleton features from **KIMORE** and **UI-PRMD** datasets. The first row of below figures is 3d position features, and the second row is the angle features (a.k.a. orientation features).
 
@@ -99,15 +99,21 @@ python ./tools/result/kimore_folds_statistics.py
 ```
 
 ## Training
-To train different ensemble strategies in EGCN for KIMORE, run
+To train different ensemble strategies of EGCN for KIMORE, run
 ```
 sh train_kimore_cv.sh
 ```
 
-To train different ensemble strategies in EGCN for UI-PRMD, run
+To train different ensemble strategies of EGCN for UI-PRMD, run
 ```
 sh train_ui_prmd_cv.sh
 ```
+
+## Acknowledgements
+This repo is based on
+- [ST-GCN](https://github.com/yysijie/st-gcn)
+
+Thanks to the original authors for their work!
 
 ## Contact
 For any question, feel free to contact

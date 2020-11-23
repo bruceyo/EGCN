@@ -42,15 +42,17 @@ class REC_Processor(Processor):
         self.model = self.io.load_model(self.arg.model,
                                         **(self.arg.model_args))
         #self.model.apply(weights_init)
-        '''
-        self.model.gcn_pos.fcn = nn.Conv2d(256, 10, kernel_size=1)
-        self.model.gcn_pos = self.io.load_weights(self.model.gcn_pos, '/media/bruce/2T/data/UI_PRMD/work_st_gcn/kinect/cls_4_cv_bs8_1/epoch162_model.pt',
-                                          self.arg.ignore_weights)
-        '''
-        self.model.gcn_pos.fcn = nn.Conv2d(256, 8, kernel_size=1)
-        self.model.gcn_pos = self.io.load_weights(self.model.gcn_pos, '/media/bruce/2T/data/KiMoRe/work_st_gcn/kinect/epoch182_model.pt',
-                                          self.arg.ignore_weights)
-        #'''
+        if self.arg.model_args['graph_args']['layout'] == 'ui_prmd':
+            print('Model loaded for MLE on UI-PRMD')
+            self.model.gcn_pos.fcn = nn.Conv2d(256, 10, kernel_size=1)
+            self.model.gcn_pos = self.io.load_weights(self.model.gcn_pos, './models/ui_prmd_model.pt',
+                                              self.arg.ignore_weights)
+        else:
+            print('Model loaded for MLE on KIMORE')
+            self.model.gcn_pos.fcn = nn.Conv2d(256, 8, kernel_size=1)
+            self.model.gcn_pos = self.io.load_weights(self.model.gcn_pos, './models/kimore_model.pt',
+                                              self.arg.ignore_weights)
+
         self.model.gcn_pos.eval()
 
         self.loss = nn.CrossEntropyLoss()
