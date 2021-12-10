@@ -5,7 +5,7 @@ This repository holds the codebase, dataset and models for the work "**Effective
 Rehabilitation exercise aims to restore physical functions from injury. With the release of motion sensors like Kinect, skeleton-based rehabilitation assessment attracts increasing research interest in computer vision. Existing attempts on skeleton-based rehabilitation exercise assessment usually rely on geometric features or statistical methods, which is a lack of effective skeleton data representation methods. Usually, skeleton data could be collected with sensors like Kinect or motion captures that provide two groups of features (i.e., position and orientation features). Graph Convolutional Network (GCN) has achieved encouraging performance for skeleton-based action recognition. However, it might not be able to fully make use of different features of the skeleton data. To advance the prior work, we propose an Ensemble-based GCN (EGCN) learning framework for rehabilitation exercise assessment.
 
 <div align="center">
-    <img src="resource/info/ensemble_framework.png">
+    <img src="resource/ensemble_framework.png">
 </div>
 
 ## Visulization of Position and Orientation Features of Skeleton Joints
